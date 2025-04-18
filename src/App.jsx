@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import Categories from "./components/Home/Main/Categories";
 import Footer from "./components/Footer";
 
+
 function App() {
 
   return (

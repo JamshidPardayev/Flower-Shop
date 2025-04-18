@@ -4,12 +4,13 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { NavLink } from 'react-router-dom';
 import { HiOutlineXMark } from "react-icons/hi2";
 import { IoIosMenu } from "react-icons/io";
+import '@fontsource/inter';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className='relative'>
+    <div  style={{ fontFamily: 'Inter, sans-serif' }} className='relative'>
       <div className='flex items-center justify-between max-w-[1200px] px-[20px] min-h-[100px] border-b border-b-green-600 mx-auto'>
         <img src="/image/logo.svg" alt="logo" />
         
