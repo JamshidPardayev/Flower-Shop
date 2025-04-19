@@ -17,6 +17,7 @@ const Navbar = () => {
         <div className='flex gap-x-[30px] text-[16px] font-bold max-sm:hidden'>
           <NavLink to="/"><p>Home</p></NavLink>
           <NavLink to="/blog"><p>Blog</p></NavLink>
+          {/* <NavLink to="/register"><p>reg</p></NavLink> */}
         </div>
 
         <div className='flex items-center gap-x-[30px] text-[25px]'>

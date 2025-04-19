@@ -5,7 +5,7 @@ import Discount from './Discount'
 
 const Categories = () => {
   return (
-    <div className='max-w-[310px]'>
+    <div className='max-w-[310px] max-lg:hidden'>
         <Category />
         <PriceRange />
         <Discount />
