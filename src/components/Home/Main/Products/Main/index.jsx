@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const index = () => {
+const Main2 = () => {
   return (
-    <div>index</div>
+    <div>Main2</div>
   )
 }
+
+export default Main2

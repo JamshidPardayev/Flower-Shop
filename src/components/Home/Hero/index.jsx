@@ -7,7 +7,7 @@ import '@fontsource/inter';
 
 const Hero = () => {
   return (
-    <div style={{ fontFamily: 'Inter, sans-serif' }} className='min-h-[450px] max-w-[1200px] mx-auto p-[20px] bg-[#F5F5F580] content-end mt-[12px] mb-[50px]'>
+    <div style={{ fontFamily: 'Inter, sans-serif' }} className='min-h-[450px] max-w-[1200px] mx-auto p-[20px] bg-[#F5F5F580] content-end mt-[12px]'>
        <Swiper
         spaceBetween={30}
         pagination={{

@@ -49,9 +49,11 @@ const Navbar = () => {
             <p className='pl-[5px] hover:border-l-[4px] hover:border-l-[#46a358] h-[40px] hover:text-[#46a358] flex items-center'>Blog</p>
           </NavLink>
         </div>
+        <NavLink to="/register">
         <button className='flex items-center justify-center mx-auto mt-[20px] text-white w-[80%] h-[50px] text-[16px] font-bold rounded-[5px] bg-[#46a358] hover:bg-green-700 duration-300'>
           <IoMdLogIn className='text-[25px]' /> <p>Login</p>
         </button>
+        </NavLink>
       </div>
     </div>
   );
