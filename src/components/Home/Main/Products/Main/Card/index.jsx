@@ -29,7 +29,6 @@ const MyCard = () => {
             <div className="h-[250px] w-[250px]">
               <img
                 src={item.main_image}
-                // alt={item.title}
                 className="object-cover rounded w-full h-full"
               />
             </div>
