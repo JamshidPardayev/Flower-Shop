@@ -28,7 +28,7 @@ const BlogCard = () => {
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    fetchBlogs(value); // Har yozganda serverga so'rov yuborib search qiladi
+    fetchBlogs(value); 
   };
 
   return (
@@ -64,7 +64,6 @@ const BlogCard = () => {
         )}
       </div>
 
-      {/* Blogs section */}
       <div className='grid grid-cols-3 gap-6 mt-[40px] max-md:grid-cols-2 max-sm:grid-cols-1'>
         {blogs.length > 0 ? (
           blogs.map((blog) => (
@@ -82,3 +81,4 @@ const BlogCard = () => {
 };
 
 export default BlogCard;
+

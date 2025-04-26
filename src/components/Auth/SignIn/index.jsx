@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
 import { MdQrCode2 } from "react-icons/md";
+import { signInWithGoogle } from '../../../../firebase';
 
 const api = import.meta.env.VITE_API;
 
@@ -35,6 +36,32 @@ const Login = () => {
       setErrorMsg("Email yoki parol noto‘g‘ri!");
     }
   };
+  const googleAuthHandler = async () => {
+    try {
+      const result = await signInWithGoogle();
+      if (!result?.user?.email) {
+        setErrorMsg("Google bilan kirishda xatolik yuz berdi!");
+        return;
+      }
+  
+      const response = await axios.post(`${api}/user/sign-in/google?access_token=6506e8bd6ec24be5de357927`, {
+        email: result.user.email,
+      });
+  
+      if (response.status === 200 && response.data.data?.token && response.data.data?.user) {
+        setSuccessMsg("Google orqali kirish muvaffaqiyatli amalga oshdi!");
+        localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem("name", response.data.data.user.name);
+        window.location.reload(); // sahifani yangilab, Navbar da ism chiqadi
+      } else {
+        setErrorMsg("Google orqali kirishda xatolik yuz berdi!");
+      }
+    } catch (error) {
+      console.error("Google Login Error:", error);
+      setErrorMsg("Google orqali kirishda xatolik yuz berdi!");
+    }
+  };
+  
 
   return (
     <div className="w-full">
@@ -73,7 +100,7 @@ const Login = () => {
       </div>
 
       <div className='flex flex-col gap-y-2'>
-        <button className='h-[30px] border flex items-center justify-center gap-x-3 text-[#727272] text-[13px] hover:bg-gray-200 duration-300'>
+        <button onClick={googleAuthHandler} className='h-[30px] border flex items-center justify-center gap-x-3 text-[#727272] text-[13px] hover:bg-gray-200 duration-300'>
           <FaGoogle className='text-[15px] text-pink-600' />
           <p>Continue With Google</p>
         </button>
