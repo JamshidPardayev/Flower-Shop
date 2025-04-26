@@ -8,6 +8,7 @@ import MyAddress from "./pages/profile/MyAddress";
 import MyTrack from "./pages/profile/MyTrack";
 import MyWishlist from "./pages/profile/MyWishlist";
 import MyProducts from "./pages/profile/MyProducts";
+import BlogId from "./pages/blog/BlogCard/BlogCardId";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogId />} />
 
         <Route path="/profile" element={<Profile />}>
           <Route index element={<MyAccount />} />

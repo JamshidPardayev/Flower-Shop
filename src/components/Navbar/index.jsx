@@ -106,7 +106,7 @@ const Navbar = () => {
         {userName ? (
           <NavLink to="/my-account" onClick={() => setMenuOpen(false)}>
             <button className='flex items-center justify-center mx-auto mt-[20px] text-white w-[80%] h-[50px] text-[16px] font-bold rounded-[5px] bg-[#46a358] hover:bg-green-700 duration-300'>
-              👤 {userName}
+             {userName}
             </button>
           </NavLink>
         ) : (
