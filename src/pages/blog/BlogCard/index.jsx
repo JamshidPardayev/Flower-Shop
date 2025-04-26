@@ -5,25 +5,31 @@ import { LuCirclePlus } from "react-icons/lu";
 
 const BlogCard = () => {
   const [blogs, setBlogs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const fetchBlogs = async (search = '') => {
+    try {
+      const response = await fetch(`https://green-shop-backend.onrender.com/api/user/blog?access_token=64bebc1e2c6d3f056a8c85b7&search=${search}`);
+      const data = await response.json();
+      setBlogs(data.data);
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+    }
+  };
+
   useEffect(() => {
-    // User token bor yoki yo'qligini tekshirish
     const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token); // Agar token bo'lsa, isLoggedIn true bo'ladi
+    setIsLoggedIn(!!token);
 
-    const fetchBlogs = async () => {
-      try {
-        const response = await fetch('https://green-shop-backend.onrender.com/api/user/blog?access_token=64bebc1e2c6d3f056a8c85b7&search=');
-        const data = await response.json();
-        setBlogs(data.data);
-      } catch (error) {
-        console.error('Error fetching blogs:', error);
-      }
-    };
-
-    fetchBlogs(); // Bloglar har doim yuklanadi, login bo'lsa ham, bo'lmasa ham
+    fetchBlogs(); // Dastlabki barcha bloglarni yuklash
   }, []);
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    fetchBlogs(value); // Har yozganda serverga so'rov yuborib search qiladi
+  };
 
   return (
     <div style={{ fontFamily: 'Inter, sans-serif' }} className='max-w-[1200px] mx-auto px-[20px] mt-[60px]'>
@@ -36,35 +42,40 @@ const BlogCard = () => {
         </p>
 
         {!isLoggedIn ? (
-          // Agar login bo'lmasa, faqat Join Greenshop ko'rinadi
           <button className='w-[150px] h-[44px] text-[16px] text-white bg-[#46a358] my-[30px] rounded-[6px]'>
             Join Greenshop
           </button>
         ) : (
-          // Agar login bo'lsa, My Feed va search input ko'rinadi
-          <form action="" className='text-center mt-2'>
+          <form action="" className='text-center mt-2' onSubmit={(e) => e.preventDefault()}>
             <h2 className='text-black text-[32px] font-bold'>My Feed</h2>
             <div className='flex items-center justify-center mt-2'>
-              <input type="text" className='border outline-none h-[40px] px-2 rounded-l-[10px] w-[400px] max-sm:w-[300px] hover:border-blue-500 cursor-pointer duration-300' />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="Search by title..."
+                className='border outline-none h-[40px] px-2 rounded-l-[10px] w-[400px] max-sm:w-[300px] hover:border-blue-500 cursor-pointer duration-300'
+              />
               <CiSearch className='w-[40px] h-[40px] border p-2 rounded-r-[10px] bg-gray-50 hover:border-blue-500 hover:text-blue-600 duration-300 cursor-pointer' />
             </div>
-            
-            <LuCirclePlus className='text-[30px] cursor-pointer mt-4 mx-auto' />  
 
+            <LuCirclePlus className='text-[30px] cursor-pointer mt-4 mx-auto' />
           </form>
-          
         )}
       </div>
 
-
-      {/* Blogs section - bu yerda har doim ko'rinadi */}
+      {/* Blogs section */}
       <div className='grid grid-cols-3 gap-6 mt-[40px] max-md:grid-cols-2 max-sm:grid-cols-1'>
-        {blogs.map((blog) => (
-          <div key={blog.id} className='border p-4 rounded-[10px] shadow-md'>
-            <h3 className='text-[22px] font-bold mt-[10px]'>{blog.title}</h3>
-            <p className='text-[16px] text-gray-600 mt-[8px]'>{blog.short_description}</p>
-          </div>
-        ))}
+        {blogs.length > 0 ? (
+          blogs.map((blog) => (
+            <div key={blog.id} className='border p-4 rounded-[10px] shadow-md'>
+              <h3 className='text-[22px] font-bold mt-[10px]'>{blog.title}</h3>
+              <p className='text-[16px] text-gray-600 mt-[8px]'>{blog.short_description}</p>
+            </div>
+          ))
+        ) : (
+          <p className='text-center col-span-3 text-gray-500'>No blogs found</p>
+        )}
       </div>
     </div>
   );
