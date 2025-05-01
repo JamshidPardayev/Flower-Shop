@@ -1,34 +1,37 @@
-import React from 'react'
+import React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-
+import { useSearchParams } from 'react-router-dom';
 
 const MyTab = () => {
-  const [value, setValue] = React.useState('one');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentType = searchParams.get("type") || "all-plants";
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const updateType = (type) => {
+    searchParams.set("type", type);
+    setSearchParams(searchParams);
   };
 
+  const handleChange = (event, newValue) => {
+    updateType(newValue);
+  };
 
   return (
-    <div>
-     <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%' }}>
       <Tabs
-        value={value}
+        value={currentType}
         onChange={handleChange}
         textColor="secondary"
         indicatorColor="secondary"
         aria-label="secondary tabs example"
       >
-        <Tab value="one" label="All Plants" />
-        <Tab value="two" label="New Arrivals" />
-        <Tab value="three" label="Sale" />
+        <Tab value="all-plants" label="All Plants" />
+        <Tab value="new-arrivals" label="New Arrivals" />
+        <Tab value="sale" label="Sale" />
       </Tabs>
     </Box>
-    </div>
-  )
-}
+  );
+};
 
 export default MyTab;
