@@ -3,10 +3,21 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import "@fontsource/inter";
 import { useSearchParams } from "react-router-dom";
+import { FaRegHeart } from "react-icons/fa";
+import { IoMdSearch } from "react-icons/io";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { addDataToShopping } from "../../../../../../redux/shoppingSlice";
 
 const api = import.meta.env.VITE_API;
 
 const MyCard = () => {
+
+  const dispatch = useDispatch();
+  const addToCard = (item) => {
+    dispatch(addDataToShopping(item))
+  }
+
   const [searchParams] = useSearchParams();
 
   const category = searchParams.get("category") || "house-plants";
@@ -33,7 +44,7 @@ const MyCard = () => {
         {data?.data?.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col items-center justify-end bg-gray-200 gap-1 p-1 rounded shadow-md hover:shadow-lg transition-shadow duration-300"
+            className="relative group  flex flex-col items-center justify-end bg-gray-200 gap-1 p-1 rounded shadow-md hover:shadow-lg transition-shadow duration-300"
           >
             <div className="h-[250px] w-[250px]">
               <img
@@ -43,6 +54,15 @@ const MyCard = () => {
                 className="object-cover rounded w-full h-full"
               />
             </div>
+            <div className="absolute bottom-[90px]  scale-0  group-hover:scale-100 flex gap-x-3  transition-all duration-300">
+
+
+              <AiOutlineShoppingCart onClick={() => addToCard(item)} className="p-1.5 h-[30px] w-[30px] rounded-[5px] bg-white cursor-pointer hover:text-gray-700"/>
+              
+              <FaRegHeart className="p-1.5 h-[30px] w-[30px] rounded-[5px] bg-white cursor-pointer hover:text-gray-700" />
+              <IoMdSearch className="p-1.5 h-[30px] w-[30px] rounded-[5px] bg-white cursor-pointer hover:text-gray-700" />
+            </div>
+
             <h2 className="text-[24px] text-[#46A358] font-bold leading-[32px] text-center">
               {item.title}
             </h2>

@@ -9,6 +9,8 @@ import MyTrack from "./pages/profile/MyTrack";
 import MyWishlist from "./pages/profile/MyWishlist";
 import MyProducts from "./pages/profile/MyProducts";
 import BlogId from "./pages/blog/BlogCard/BlogCardId";
+import ProductCard from "./pages/ProductCard/page";
+import ProductCheckout from "./pages/ProductCheckout/page";
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogId />} />
+
+        <Route path="/productCard" element={<ProductCard />} />
+        <Route path="/productCheckout" element={<ProductCheckout />} />
 
         <Route path="/profile" element={<Profile />}>
           <Route index element={<MyAccount />} />
