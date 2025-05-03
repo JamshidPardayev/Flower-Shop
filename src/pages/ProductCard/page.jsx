@@ -51,39 +51,47 @@ const ProductCard = () => {
                   </tr>
                 ) : (
                   cartItems.map((item) => (
-                    <tr key={item._id} className="border-b">
-                      <td className="border-r min-w-[150px] py-2 px-0 flex items-center gap-1">
-                        <img
-                          src={item.main_image}
-                          alt={item.title}
-                          className="min-w-[60px] h-16 object-cover rounded"
-                        />
-                        <span>{item.title}</span>
+                    <tr key={item._id} className="border-b h-[70px]">
+                      <td className="border-r py-2 px-1 ">
+                        <div className="flex items-center gap-1 min-w-[150px]">
+                          <img
+                            src={item.main_image}
+                            alt={item.title}
+                            className="w-[60px] h-[60px] object-cover rounded"
+                          />
+                          <span className="text-sm font-medium text-[#333]">
+                            {item.title}
+                          </span>
+                        </div>
                       </td>
-                      <td className="border-r py-2 px-1">${item.price}</td>
-                      <td className="border-r py-2 px-1">
-                        <button
-                          className="w-[22px] h-[22px] rounded-full text-white hover:bg-green-800 bg-green-600"
-                          onClick={() =>
-                            dispatch(decreaseCountFromShopping(item))
-                          }
-                        >
-                          -
-                        </button>
-                        <span className="mx-1">{item.count}</span>
-                        <button
-                          className="w-[22px] h-[22px] rounded-full text-white hover:bg-green-800 bg-green-600"
-                          onClick={() =>
-                            dispatch(increaseCountFromShopping(item))
-                          }
-                        >
-                          +
-                        </button>
+                      <td className="border-r py-2 px-1 text-sm text-[#333]">
+                        ${item.price}
                       </td>
                       <td className="border-r py-2 px-1">
+                        <div className="flex items-center gap-1">
+                          <button
+                            className="w-[22px] h-[22px] rounded-full text-white hover:bg-green-800 bg-green-600"
+                            onClick={() =>
+                              dispatch(decreaseCountFromShopping(item))
+                            }
+                          >
+                            -
+                          </button>
+                          <span>{item.count}</span>
+                          <button
+                            className="w-[22px] h-[22px] rounded-full text-white hover:bg-green-800 bg-green-600"
+                            onClick={() =>
+                              dispatch(increaseCountFromShopping(item))
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                      </td>
+                      <td className="border-r py-2 px-1 text-sm text-[#333]">
                         ${(item.price * item.count).toFixed(2)}
                       </td>
-                      <td className="py-2 px-1">
+                      <td className="py-2 px-3 text-center">
                         <button
                           onClick={() =>
                             dispatch(deleteFlowerFromShopping(item))
@@ -100,7 +108,7 @@ const ProductCard = () => {
             </table>
           </div>
 
-          <div className="min-w-[305px]">
+          <div className="min-w-[320px]">
             <h2 className="text-[14px] font-bold border-b-[2px] border-b-[#46a358] mt-3 py-3">
               Card Total
             </h2>
@@ -114,22 +122,31 @@ const ProductCard = () => {
                 Apply
               </button>
             </div>
-            <p className="text-[14px] text-[gray] mt-4">Subtotal: <span className="font-bold text-[#1a1a1a]">${totalPrice}</span></p>
+            <p className="text-[14px] text-[gray] mt-4">
+              Subtotal:{" "}
+              <span className="font-bold text-[#1a1a1a]">${totalPrice}</span>
+            </p>
             <p className="text-[14px] text-[gray] mt-3">
-              Coupon Discount: <span className="font-bold text-[#1a1a1a]">$0.00</span>
+              Coupon Discount:{" "}
+              <span className="font-bold text-[#1a1a1a]">$0.00</span>
             </p>
             <p className="text-[14px] text-[gray] mt-3">
               Shipping: <span className="font-bold text-[#1a1a1a]">$16</span>{" "}
             </p>
             <p className="text-[16px] flex justify-between mt-3 font-semibold">
-              Total: <span className="text-[#43a253]">${totalPrice.toFixed(2)}</span>
+              Total:{" "}
+              <span className="text-[#43a253]">${totalPrice.toFixed(2)}</span>
             </p>
 
             <NavLink to={"/productCheckout"}>
-              <button className="my-4 w-full h-[40px] bg-[#46a258] rounded-[6px] text-white duration-300 hover:bg-green-700">Proceed to Checkout</button>
+              <button className="my-4 w-full h-[40px] bg-[#46a258] rounded-[6px] text-white duration-300 hover:bg-green-700">
+                Proceed to Checkout
+              </button>
             </NavLink>
             <NavLink to={"../"}>
-              <button className=" w-full h-[40px] text-[#46a258] rounded-[6px] hover:text-green-700 duration-300 ">Continue Shopping</button>
+              <button className=" w-full h-[40px] text-[#46a258] rounded-[6px] hover:text-green-700 duration-300 ">
+                Continue Shopping
+              </button>
             </NavLink>
           </div>
         </div>
